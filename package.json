@@ -1,0 +1,15 @@
+{
+  "name": "sharedbrain-mcp",
+  "version": "1.0.0",
+  "description": "SharedBrain MCP server — shared memory for Cascade, Mutik, and ChatGPT",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "redis": "^4.6.13",
+    "ulid": "^2.3.0",
+    "dotenv": "^16.4.5"
+  }
+}
