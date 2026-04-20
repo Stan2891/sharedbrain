@@ -1,0 +1,16 @@
+[Unit]
+Description=SharedBrain MCP Server
+After=network.target docker.service
+Wants=docker.service
+
+[Service]
+Type=simple
+User=stan
+WorkingDirectory=/home/stan/Desktop/sharedbrain
+ExecStart=/usr/bin/node /home/stan/Desktop/sharedbrain/server.js
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
