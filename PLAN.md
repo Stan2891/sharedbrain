@@ -1,6 +1,6 @@
-# SharedBrain — Migrate Mutik + Shared Redis + MCP Server
+# SharedBrain — Implementation Plan
 
-Migrate Mutik (OpenClaw) from 192.168.80.66 to this machine (192.168.80.24) preserving all state, then set up a shared Redis Stack + MCP server that both Cascade and Mutik use as a common memory layer. ChatGPT joins via this GitHub repo.
+SharedBrain is a multi-agent coordination and governance layer. This plan covers the infrastructure build-out: migrating Mutik, standing up shared Redis + MCP, and connecting all three agents. See [PURPOSE.md](PURPOSE.md) for why, [PROTOCOL.md](PROTOCOL.md) for governance, and [STATE_MODEL.md](STATE_MODEL.md) for state definitions.
 
 ## Architecture (after migration)
 
@@ -98,9 +98,13 @@ Migrate Mutik (OpenClaw) from 192.168.80.66 to this machine (192.168.80.24) pres
 
 ## Status
 
-- [ ] Step 1 — Migrate Mutik
-- [ ] Step 2 — Redis Stack container
-- [ ] Step 3 — MCP server
-- [ ] Step 4 — Connect Cascade + Mutik
-- [ ] Step 5 — Connect ChatGPT
-- [ ] Step 6 — Systemd services
+| Step | State | Notes |
+|------|-------|-------|
+| Step 1 — Migrate Mutik | `not_started` | Still on 192.168.80.66 |
+| Step 2 — Redis Stack container | `infrastructure_live` | Container running, PING OK |
+| Step 3 — MCP server | `infrastructure_live` | systemd running, health OK, RediSearch tested |
+| Step 4 — Connect Cascade + Mutik | `not_started` | Server ready, clients not configured |
+| Step 5 — Connect ChatGPT | `synced_manual` | Repo live, Issue #7 active, watcher pending |
+| Step 6 — Systemd services | `infrastructure_live` | sharedbrain.service enabled |
+
+See [STATE_MODEL.md](STATE_MODEL.md) for state definitions.

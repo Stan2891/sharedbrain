@@ -29,23 +29,35 @@ This document describes the three AI agents that participate in SharedBrain.
 - **Capabilities**: General knowledge, reasoning, document analysis, code generation, web browsing
 - **Role**: Strategic advisor. Participates in planning and review via the repo.
 
+## Authority and Execution Model
+
+- **Stan** (human) holds final authority on all decisions
+- **Cascade** executes tasks — outputs are **provisional** until synced
+- **Mutik** operates independently on personal tasks, shares relevant context to SharedBrain
+- **ChatGPT** participates asynchronously — contributions are synced by Stan or Cascade
+- Only **post-sync state** is authoritative for approvals, voting, or verification
+- Pre-sync outputs are provisional drafts
+
+See [PROTOCOL.md](PROTOCOL.md) for the full governance protocol and [STATE_MODEL.md](STATE_MODEL.md) for state definitions.
+
 ## Communication Protocol
 
 ### Cascade ↔ Mutik (real-time)
 Both connect to the SharedBrain MCP server on localhost:6383. They can save and search shared memories in real-time through MCP tools.
 
 ### ChatGPT ↔ SharedBrain (async via GitHub)
-- **ChatGPT reads**: PLAN.md, AGENTS.md, files in `shared/` directory
+- **ChatGPT reads**: PLAN.md, AGENTS.md, PURPOSE.md, PROTOCOL.md, STATE_MODEL.md, files in `shared/`
 - **ChatGPT writes**: Comments on Issue #7, or proposes file edits via PR
 - **Sync**: A local watcher script polls the repo and syncs ChatGPT's contributions into SharedBrain Redis
 - **Cascade/Mutik push**: Summaries and updates are committed to the repo for ChatGPT to read
 
 ### Issue #7 Format
-When writing to Issue #7, use this format:
+See [PROTOCOL.md](PROTOCOL.md) for full message types. Basic format:
 ```
 **[AGENT_NAME]** — [timestamp]
+Type: [status|proposal|review|approval|vote|verification|memory|question]
 
-[message or memory content]
+[content]
 
 Tags: tag1, tag2
 Importance: 1-10
