@@ -1,0 +1,17 @@
+[Unit]
+Description=Mutik OpenClaw Gateway
+After=network.target mutik-mem0.service
+Wants=mutik-mem0.service
+
+[Service]
+Type=simple
+User=stan
+Environment=PATH=/home/stan/.nvm/versions/node/v22.22.1/bin:/usr/local/bin:/usr/bin:/bin
+Environment=HOME=/home/stan
+WorkingDirectory=/home/stan
+ExecStart=/home/stan/.nvm/versions/node/v22.22.1/bin/node /home/stan/.nvm/versions/node/v22.22.1/lib/node_modules/openclaw/openclaw.mjs gateway start
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+[Unit]
+Description=Mutik mem0 Server (Qdrant + fastembed)
+After=network.target
+
+[Service]
+Type=simple
+User=stan
+ExecStart=/home/stan/.openclaw/workspace/.venv-mem0/bin/python3 /home/stan/.openclaw/mem0-server.py
+Restart=always
+RestartSec=5
+Environment=MEM0_PORT=9101
+
+[Install]
+WantedBy=multi-user.target
